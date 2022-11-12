@@ -1,0 +1,23 @@
+import React from "react";
+
+const Profile = ({ userId }) => {
+  const [user, setUser] = useState(userId);
+
+  useEffect(() => {
+    fetch(`https://cyf-react.glitch.me/customers/${userId}`)
+      .then(res => res.json())
+      .then(data => {
+        setUser(data);
+      });
+  }, [userId]);
+
+  return (
+    <>
+      <div>{user.id}</div>
+      <div>{user.firstName}</div>
+      <div>{user.surname}</div>
+    </>
+  );
+};
+
+export default Profile;
