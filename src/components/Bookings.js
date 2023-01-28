@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Profile from "./Profile.js";
 import Search from "./Search.js";
 import SearchResults from "./SearchResults.js";
@@ -16,15 +16,15 @@ const Bookings = () => {
     )
       .then(res => res.json())
       .then(data => {
-        if (data.error?.length != 0) {
+        if (data.error !== undefined) {
           setErrorMessage(data.error);
         } else {
           setBookings(data);
           setData(data);
         }
         setIsLoading(false);
-      })
-      .catch(error => console.log(error));
+      });
+    //.catch((error) => console.log(error));
   }, []);
 
   //16 hasta 23
@@ -32,7 +32,7 @@ const Bookings = () => {
     const filterBookings = dataOriginal.filter((filtro, index) => {
       return (
         searchVal.toUpperCase() === filtro.firstName ||
-        searchVal.toUpperCase() === el.surname
+        searchVal.toUpperCase() === filtro.surname
       );
     });
     setBookings(filterBookings > 0 ? dataOriginal : filterBookings);
@@ -49,12 +49,13 @@ const Bookings = () => {
         <Search search={search} />
         {<SearchResults results={bookings} ShowProfile={handleShowProfile} />}
         {userId !== 0 && <Profile userId={userId} />}
+
         {isLoading ? (
-          <div />
-        ) : errorMessage?.length > 0 ? (
           <div>LOADING</div>
+        ) : errorMessage?.length > 0 ? (
+          <div>{errorMessage}</div>
         ) : (
-          <SearchResults results={bookings} ShowProfile={handleShowProfile} />
+          <SearchResults results={bookings} showProfile={handleShowProfile} />
         )}
         {userId !== 0 && <Profile userId={userId} />}
       </div>

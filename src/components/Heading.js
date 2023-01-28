@@ -6,7 +6,7 @@ const Heading = () => {
       <span className="my-col-6 my-pa-1">CYF HOTEL</span>
       <span className="my-col-6 my-flex-row my-jc-end my-pr-1 my-pt-small">
         <img
-          className=""
+          className="App-header__image"
           src="https://image.flaticon.com/icons/svg/139/139899.svg"
           alt="Hotel"
         />
@@ -14,3 +14,5 @@ const Heading = () => {
     </header>
   );
 };
+
+export default Heading;

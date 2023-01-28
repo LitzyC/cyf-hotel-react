@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SearchButton from "./SearchButton.js";
 
 const Search = ({ search }) => {
@@ -27,11 +27,11 @@ const Search = ({ search }) => {
                 type="text"
                 id="customerName"
                 className="form-control"
+                value={searchInput}
+                onChange={handleSearchInput}
                 placeholder="Customer name"
               />
-              <button id="SearchButton" className="btn btn-primary">
-                Search
-              </button>
+              <SearchButton />
             </div>
           </form>
         </div>
